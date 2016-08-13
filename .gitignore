@@ -1,0 +1,10 @@
+# Compiler/linker output.
+#
+*.d
+*.o
+*.obj
+*.so
+*.dll
+*.a
+*.lib
+*.exp

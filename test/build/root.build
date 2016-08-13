@@ -1,0 +1,8 @@
+# file      : test/build/root.build
+# copyright : not copyrighted - public domain
+
+using c
+
+# Every exe{} in this subproject is by default a test.
+#
+exe{*}: test = true

@@ -1,0 +1,24 @@
+# file      : build/bootstrap.build
+# copyright : not copyrighted - public domain
+
+project = libsqlite3
+
+# SQLite releases usually have 3-component versions but once in a while they
+# will make a 4-component release for what appears to be important bug fixes
+# only. So instead of dragging the fourth component around (and confusing a
+# lot of people in the process) we will always have three components and will
+# handle an occasional bugfix release with a revision.
+#
+version = 3.14.1
+revision = 0
+
+using build@0.4.0-a1
+using config
+using dist
+using test
+using install
+
+dist.package = $project-$version
+
+if ($revision != 0)
+  dist.package += +$revision

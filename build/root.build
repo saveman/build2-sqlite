@@ -1,0 +1,6 @@
+# file      : build/root.build
+# copyright : not copyrighted - public domain
+
+using c
+
+test/: install = false # Don't install tests.
