@@ -13,6 +13,10 @@ lib{sqlite3}: {h c}{sqlite3} h{sqlite3ext}
 # that it is possible to override the defaults by specifying them as =0 (it's
 # also the reason we use cc.* instead of c.*, the former comes first).
 #
+# PREUPDATE_HOOK is required by SESSION
+#
+# -DSQLITE_ENABLE_SESSION=1 removed due to bug in 3.14.1.
+#
 cc.poptions =+ \
 -DSQLITE_THREADSAFE=1 \
 -DSQLITE_ENABLE_FTS4=1 \
@@ -23,6 +27,7 @@ cc.poptions =+ \
 -DSQLITE_ENABLE_DBSTAT_VTAB=1 \
 -DSQLITE_ENABLE_UNLOCK_NOTIFY=1 \
 -DSQLITE_ENABLE_LOAD_EXTENSION=1 \
+-DSQLITE_ENABLE_PREUPDATE_HOOK=1 \
 -DSQLITE_ENABLE_COLUMN_METADATA=1 \
 -DSQLITE_ENABLE_FTS3_PARENTHESIS=1
 
