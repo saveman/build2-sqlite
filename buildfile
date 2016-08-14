@@ -34,7 +34,12 @@ if ($c.target.class != "windows")
   # SQLITE_ENABLE_LOAD_EXTENSION requires -ldl
   # SQLITE_ENABLE_FTS5 requires -lm (calls log(1))
   #
-  # @@ Should we import instead?
+  # You may be wondering why we didn't import them instead. While it would be
+  # almost equivalent, there is a subtle difference: if we import them, then
+  # build2 will start selecting static/shared libraries and we probably don't
+  # want that here. These libraries are in a sense an extension of -lc and we
+  # want them to be linked in the same way as -lc (e.g., the user will have to
+  # specify -static to force static linking and so on).
   #
   c.libs += -lpthread -ldl -lm
 
