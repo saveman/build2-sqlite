@@ -1,7 +1,7 @@
 : 1
 name: libsqlite3
 version: 3.14.1
-summary: C library that implements an in-process SQL database engine
+summary: SQL database engine as an in-process C library
 license: public domain
 tags: sql, database, embeddable, serverless, self-contained, transactional
 description-file: README
