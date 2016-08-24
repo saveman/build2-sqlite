@@ -3,7 +3,7 @@
 
 $out_root/:
 {
-  include ./
+  include sqlite3/
 }
 
-export $out_root/lib{sqlite3}
+export $out_root/sqlite3/lib{sqlite3}
