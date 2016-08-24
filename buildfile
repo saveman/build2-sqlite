@@ -46,12 +46,10 @@ if ($c.target.class != "windows")
   # want them to be linked in the same way as -lc (e.g., the user will have to
   # specify -static to force static linking and so on).
   #
-  c.libs += -lpthread -ldl -lm
-
-  # @@ Currently not implemented in build2. Also is it right to link to other
-  #    libraries that may have been specified by the user?
+  # We also assume these are implementation dependencies (so there is no
+  # c.export.libs listing them).
   #
-  liba{sqlite3}: cc.export.libs = $c.libs
+  c.libs += -lpthread -ldl -lm
 }
 
 # Both Debian and Fedora add this so gotta be important.
