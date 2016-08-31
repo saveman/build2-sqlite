@@ -3,6 +3,8 @@
 
 project = libsqlite3
 
+using build@0.4.0-a1
+
 # SQLite releases usually have 3-component versions but once in a while they
 # will make a 4-component release for what appears to be important bug fixes
 # only. So instead of dragging the fourth component around (and confusing a
@@ -10,15 +12,20 @@ project = libsqlite3
 # handle an occasional bugfix release with a revision.
 #
 version = 3.14.1
-revision = 0
 
-using build@0.4.0-a1
-using config
-using dist
-using test
-using install
+abi_major = 3
+abi_minor = 14
+abi_patch = 1
+abi_prerelease = false
+
+revision = 0
 
 dist.package = $project-$version
 
 if ($revision != 0)
   dist.package += +$revision
+
+using config
+using dist
+using test
+using install

@@ -3,6 +3,14 @@
 
 lib{sqlite3}: {h c}{sqlite3} h{sqlite3ext}
 
+# For pre-releases use the complete version to make sure they cannot be used
+# in place of another pre-release or the final version.
+#
+if $abi_prerelease
+  lib{sqlite3}: bin.lib.version = @-$version
+else
+  lib{sqlite3}: bin.lib.version = @-$abi_major.$abi_minor
+
 # The set of features we enable by default is inspired by Debian, Fedora, and
 # the official documentation.
 #
@@ -27,6 +35,8 @@ cc.poptions =+ \
 -DSQLITE_ENABLE_PREUPDATE_HOOK=1 \
 -DSQLITE_ENABLE_COLUMN_METADATA=1 \
 -DSQLITE_ENABLE_FTS3_PARENTHESIS=1
+
+c.poptions += -I$src_base
 
 if ($c.target.class != "windows")
 {
