@@ -5,7 +5,3 @@ using c
 
 h{*}: extension = h
 c{*}: extension = c
-
-# All exe{} in test/ are, well, tests.
-#
-test/exe{*}: test = true
