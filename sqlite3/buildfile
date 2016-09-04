@@ -50,7 +50,10 @@ if ($c.target.class != "windows")
   # We also assume these are implementation dependencies (so there is no
   # c.export.libs listing them).
   #
-  c.libs += -lpthread -ldl -lm
+  c.libs += -lpthread -lm
+
+  if ($c.target.class != "bsd")
+    c.libs += -ldl
 }
 
 # Both Debian and Fedora add this so gotta be important.
