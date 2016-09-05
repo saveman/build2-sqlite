@@ -3,7 +3,7 @@
 
 project = libsqlite3
 
-using build@0.4.0-a1
+using build@0.4.0
 
 # SQLite releases usually have 3-component versions but once in a while they
 # will make a 4-component release for what appears to be important bug fixes
