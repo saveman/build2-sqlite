@@ -65,7 +65,7 @@ if ($c.id != "msvc")
 # modifying sqlite3.h. Note that this is also sub-optimal if we are not using
 # an export stub (no dllimport).
 #
-lib{sqlite3}: cc.export.poptions = -I$src_base
+lib{sqlite3}: cc.export.poptions = "-I$src_base"
 
 if ($c.target.class == "windows")
 {
