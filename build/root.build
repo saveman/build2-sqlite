@@ -8,4 +8,4 @@ c{*}: extension = c
 
 # Specify the test target for cross-testing.
 #
-test.target = $cxx.target
+test.target = $c.target
