@@ -1,4 +1,4 @@
-# file      : sqlite3/buildfile
+# file      : libsqlite3/buildfile
 # copyright : not copyrighted - public domain
 
 lib{sqlite3}: {h c}{sqlite3} h{sqlite3ext}
