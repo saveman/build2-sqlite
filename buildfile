@@ -1,10 +1,7 @@
 # file      : buildfile
 # copyright : not copyrighted - public domain
 
-d = sqlite3/ test/
-./: $d doc{INSTALL README} file{manifest}
-include $d
-
+./: sqlite3/ test/ doc{INSTALL README} file{manifest}
 
 # Don't install tests or the INSTALL file.
 #

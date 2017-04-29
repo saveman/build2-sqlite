@@ -1,6 +1,6 @@
 : 1
 name: libsqlite3
-version: 3.14.1
+version: 3.18.0-a.0.z
 summary: SQL database engine as an in-process C library
 license: public domain
 tags: sql, database, embeddable, serverless, self-contained, transactional
@@ -10,5 +10,5 @@ email: sqlite-users@mailinglists.sqlite.org; Mailing list.
 package-url: https://git.build2.org/cgit/packaging/sqlite/
 package-email: packaging@build2.org; Mailing list.
 build-email: builds@build2.org
-depends: * build2 >= 0.4.0
-depends: * bpkg >= 0.4.0
+depends: * build2 >= 0.5.0-
+depends: * bpkg >= 0.5.0-

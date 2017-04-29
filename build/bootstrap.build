@@ -3,8 +3,6 @@
 
 project = libsqlite3
 
-using build@0.4.0
-
 # SQLite releases usually have 3-component versions but once in a while they
 # will make a 4-component release for what appears to be important bug fixes
 # only. So instead of dragging the fourth component around (and confusing a
@@ -13,9 +11,6 @@ using build@0.4.0
 #
 # See also: https://www.sqlite.org/versionnumbers.html
 #
-version = 3.14.1
-revision = 0
-
 # The SQLite documentation says that as long as the major version stays the
 # same, then it is backwards-compatible. And since we have the major version
 # already embedded into the library name, it doesn't make much sense to repeat
@@ -43,11 +38,7 @@ revision = 0
 #
 abi_major = 1
 
-dist.package = $project-$version
-
-if ($revision != 0)
-  dist.package += +$revision
-
+using version
 using config
 using dist
 using test
