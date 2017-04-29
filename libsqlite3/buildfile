@@ -19,7 +19,7 @@ else
 #
 # PREUPDATE_HOOK is required by SESSION
 #
-# -DSQLITE_ENABLE_SESSION=1 removed for now due to bug in 3.14.1.
+# -DSQLITE_ENABLE_SESSION=1 removed for now due to bug in 3.18.0.
 #
 # Note that if disabling any previously-released features, then will need to
 # increment abi_major.
