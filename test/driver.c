@@ -51,4 +51,6 @@ main ()
 
   r = sqlite3_close (db);
   assert (r == SQLITE_OK);
+
+  return 0;
 }
