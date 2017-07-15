@@ -1,7 +1,7 @@
 # file      : libsqlite3/buildfile
 # copyright : not copyrighted - public domain
 
-lib{sqlite3}: {h c}{sqlite3} h{sqlite3ext}
+lib{sqlite3}: {h c}{*}
 
 # See bootstrap.build for details.
 #

@@ -3,4 +3,4 @@
 
 import libs = libsqlite3%lib{sqlite3}
 
-exe{driver}: c{driver} $libs
+exe{driver}: {h c}{*} $libs
