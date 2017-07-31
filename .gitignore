@@ -12,3 +12,4 @@
 *.exe
 *.exe.dlls/
 *.exe.manifest
+*.pc
