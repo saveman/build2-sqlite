@@ -64,7 +64,7 @@ if ($c.target.class != "windows")
 
 # Both Debian and Fedora add this so gotta be important.
 #
-if ($c.id != "msvc")
+if ($c.class == 'gcc')
   c.coptions += -fno-strict-aliasing
 
 # It would have been cleaner to handle this in a header but that will require
