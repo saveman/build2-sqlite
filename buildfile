@@ -5,5 +5,5 @@
 
 # Don't install tests or the INSTALL file.
 #
-dir{test/}:      install = false
+test/:           install = false
 doc{INSTALL}@./: install = false
