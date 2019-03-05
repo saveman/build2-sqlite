@@ -3,13 +3,15 @@
 
 lib{sqlite3}: {h c}{*}
 
-# See bootstrap.build for details.
-#
-if $version.pre_release
-  lib{sqlite3}: bin.lib.version = @"-$version.project_id"
-else
-  lib{sqlite3}: bin.lib.version = @"-$abi_major"
+tclass = $c.target.class
 
+bsd     = ($tclass == 'bsd')
+windows = ($tclass == 'windows')
+
+gcc = ($c.class == 'gcc')
+
+# Build options.
+#
 # The set of features we enable by default is inspired by Debian, Fedora, and
 # the official documentation.
 #
@@ -38,7 +40,7 @@ cc.poptions =+ \
 -DSQLITE_ENABLE_COLUMN_METADATA=1 \
 -DSQLITE_ENABLE_FTS3_PARENTHESIS=1
 
-if ($c.target.class != "windows")
+if! $windows
 {
   cc.poptions =+ -DHAVE_USLEEP=1
 
@@ -58,13 +60,13 @@ if ($c.target.class != "windows")
   #
   c.libs += -lpthread -lm
 
-  if ($c.target.class != "bsd")
+  if! $bsd
     c.libs += -ldl
 }
 
 # Both Debian and Fedora add this so gotta be important.
 #
-if ($c.class == 'gcc')
+if $gcc
   c.coptions += -fno-strict-aliasing
 
 # Disable warnings that pop up with -Wextra. Upstream doesn't seem to care
@@ -74,17 +76,26 @@ if ($c.class == 'gcc')
 # platforms/compilers. We pass them through but disable treating them as
 # errors.
 #
-if ($c.class == 'gcc')
+if $gcc
   c.coptions += -Wno-extra -Wno-error
 
+# Export options.
+#
 # It would have been cleaner to handle this in a header but that will require
 # modifying sqlite3.h. Note that this is also sub-optimal if we are not using
 # an export stub (no dllimport).
 #
 lib{sqlite3}: cc.export.poptions = "-I$src_base"
 
-if ($c.target.class == "windows")
+if $windows
 {
   objs{*}: c.poptions += '-DSQLITE_API=__declspec(dllexport)'
   libs{sqlite3}: cc.export.poptions += '-DSQLITE_API=__declspec(dllimport)'
 }
+
+# See bootstrap.build for details.
+#
+if $version.pre_release
+  lib{sqlite3}: bin.lib.version = @"-$version.project_id"
+else
+  lib{sqlite3}: bin.lib.version = @"-$abi_major"
