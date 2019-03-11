@@ -1,0 +1,52 @@
+# file      : buildfile
+# copyright : not copyrighted - public domain
+
+./: exe{sqlite3} doc{INSTALL README} man1{sqlite3} manifest
+
+import libs = libsqlite3%lib{sqlite3}
+
+exe{sqlite3}: {h c}{*} $libs
+
+gcc = ($c.class == 'gcc')
+
+# Build options.
+#
+# By default we are going to build a spartan shell without readline support
+# since if you are on a system that has readline then you probably already
+# have sqlite3 and won't be building this package in the first place. But
+# if you want readline, then you can enable it like this:
+#
+# config.c.poptions=-DHAVE_READLINE config.c.libs="-lreadline -lncurses"
+#
+
+# This is the subset of features that we enable by default in libsqlite3 and
+# that affect the shell. They can be overridden in the same way.
+#
+#cc.poptions =+ -DSQLITE_ENABLE_SESSION=1
+
+# Both Debian and Fedora add this so gotta be important.
+#
+if $gcc
+  c.coptions += -fno-strict-aliasing
+
+# Disable warnings that pop up with -Wextra. Upstream doesn't seem to care
+# about these and it is not easy to disable specific warnings in a way that
+# works across compilers/version (some -Wno-* options are only recognized in
+# newer versions). Some warnings may still appear for certain (newer)
+# platforms/compilers. We pass them through but disable treating them as
+# errors.
+#
+if $gcc
+  c.coptions += -Wno-extra -Wno-error
+
+# Smoke test.
+#
+exe{sqlite3}: file{test.out}: test.stdout = true
+exe{sqlite3}: test.arguments = ':memory:' \
+'CREATE TABLE test (id INTEGER PRIMARY KEY);
+INSERT INTO test VALUES(123);
+SELECT * FROM test;'
+
+# Don't install INSTALL file.
+#
+doc{INSTALL}@./: install = false

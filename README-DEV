@@ -1,0 +1,13 @@
+This document describes the approach applied to packaging SQLite for build2. In
+particular, this understanding will be useful when upgrading to a new upstream
+version.
+
+The upstream package contains the libsqlite3 library and the sqlite3 program
+that we package separately (see the respective README-DEV files for details).
+
+We extract the upstream package from the archive and symlink the required files
+into the build2 package subdirectories.
+
+For 3.18.2, that we packaged initially, the archive URL is
+https://www.sqlite.org/2017/sqlite-autoconf-3180200.tar.gz. For the future
+releases the URL can be deduced from the above.

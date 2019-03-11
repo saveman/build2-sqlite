@@ -1,0 +1,10 @@
+# file      : build/bootstrap.build
+# copyright : not copyrighted - public domain
+
+project = sqlite3
+
+using version
+using config
+using dist
+using test
+using install

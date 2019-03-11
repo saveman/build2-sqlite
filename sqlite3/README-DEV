@@ -1,0 +1,7 @@
+This document describes how the sqlite3 program was packaged for build2. In
+particular, this understanding will be useful when upgrading to a new upstream
+version. See ../README-DEV for general notes on SQLite packaging.
+
+Symlink the required upstream files:
+
+$ ln -s ../upstream/{shell.c,sqlite3.1} ./

@@ -1,5 +1,0 @@
-@@ Enable session once missing SQLITE_API is fixed. Also enable in sqlite3.
-@@ INSTALL
-?? Post-process sqlite3.h to include export code.
-@@ There is sqlite3.pc.in.
-@@ There is sqlite3.rc but it seems harmless to omit.
