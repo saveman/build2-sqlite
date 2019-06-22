@@ -1,10 +1,10 @@
 : 1
 name: libsqlite3
-version: 3.18.2+7
+version: 3.18.2+8
 project: sqlite
 summary: SQL database engine as an in-process C library
 license: public domain
-tags: sql, database, embeddable, serverless, self-contained, transactional
+topics: C, SQLite, SQL, relational database
 description-file: README
 url: https://sqlite.org/
 doc-url: https://sqlite.org/c3ref/intro.html
@@ -14,5 +14,5 @@ email: sqlite-users@mailinglists.sqlite.org ; Mailing list.
 package-email: packaging@build2.org         ; Mailing list.
 build-error-email: builds@build2.org
 builds: all
-depends: * build2 >= 0.9.0
-depends: * bpkg >= 0.9.0
+depends: * build2 >= 0.11.0
+depends: * bpkg >= 0.11.0

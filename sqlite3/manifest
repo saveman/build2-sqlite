@@ -1,10 +1,10 @@
 : 1
 name: sqlite3
-version: 3.18.2+7
+version: 3.18.2+8
 project: sqlite
 summary: SQLite database engine shell program
 license: public domain
-tags: sql, database, shell
+topics: SQLite, SQL, relational database
 description-file: README
 url: https://sqlite.org/
 doc-url: https://sqlite.org/cli.html
@@ -14,6 +14,6 @@ email: sqlite-users@mailinglists.sqlite.org ; Mailing list.
 package-email: packaging@build2.org         ; Mailing list.
 build-error-email: builds@build2.org
 builds: all
-depends: * build2 >= 0.9.0
-depends: * bpkg >= 0.9.0
+depends: * build2 >= 0.11.0
+depends: * bpkg >= 0.11.0
 depends: libsqlite3 == $
