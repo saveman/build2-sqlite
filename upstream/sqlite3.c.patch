@@ -1,6 +1,6 @@
---- sqlite3.c.orig	2019-03-09 21:21:39.522049549 +0300
-+++ sqlite3.c	2019-01-16 21:46:55.113927913 +0300
-@@ -27001,6 +27001,7 @@ SQLITE_PRIVATE int sqlite3ThreadJoin(SQL
+--- sqlite3.c.orig	2019-02-25 19:32:08.000000000 +0300
++++ sqlite3.c	2019-07-31 18:12:21.807566612 +0300
+@@ -29486,6 +29486,7 @@ SQLITE_PRIVATE int sqlite3ThreadJoin(SQL
      assert( rc!=WAIT_IO_COMPLETION );
      bRc = CloseHandle((HANDLE)p->tid);
      assert( bRc );
@@ -8,12 +8,11 @@
    }
    if( rc==WAIT_OBJECT_0 ) *ppOut = p->pResult;
    sqlite3_free(p);
-@@ -194485,7 +194486,7 @@ static int sqlite3Fts5IndexQuery(
+@@ -194877,6 +194878,7 @@ static int sessionPreupdateEqual(
+         rc = pSession->hook.xOld(pSession->hook.pCtx, iCol, &pVal);
+       }
+       assert( rc==SQLITE_OK );
++      (void)rc; /* Unused. */
+       if( sqlite3_value_type(pVal)!=eType ) return 0;
  
-   if( sqlite3Fts5BufferSize(&p->rc, &buf, nToken+1)==0 ){
-     int iIdx = 0;                 /* Index to search */
--    memcpy(&buf.p[1], pToken, nToken);
-+    if( nToken ) memcpy(&buf.p[1], pToken, nToken);
- 
-     /* Figure out which index to search and set iIdx accordingly. If this
-     ** is a prefix query for which there is no prefix index, set iIdx to
+       /* A SessionChange object never has a NULL value in a PK column */

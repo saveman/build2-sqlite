@@ -22,7 +22,7 @@ gcc = ($c.class == 'gcc')
 # This is the subset of features that we enable by default in libsqlite3 and
 # that affect the shell. They can be overridden in the same way.
 #
-#cc.poptions =+ -DSQLITE_ENABLE_SESSION=1
+cc.poptions =+ -DSQLITE_ENABLE_COLUMN_METADATA -DSQLITE_ENABLE_SESSION=1
 
 # Both Debian and Fedora add this so gotta be important.
 #

@@ -1,6 +1,6 @@
 : 1
 name: libsqlite3
-version: 3.18.2+8
+version: 3.27.2-a.0.z
 project: sqlite
 summary: SQL database engine as an in-process C library
 license: public domain
