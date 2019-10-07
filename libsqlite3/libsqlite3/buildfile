@@ -8,7 +8,8 @@ tclass = $c.target.class
 bsd     = ($tclass == 'bsd')
 windows = ($tclass == 'windows')
 
-gcc = ($c.class == 'gcc')
+gcc        = ($c.class == 'gcc')
+clang_msvc = ($c.id == 'clang' && $c.target.system == 'win32-msvc')
 
 # Build options.
 #
@@ -82,6 +83,9 @@ if! $windows
 #
 if $gcc
   c.coptions += -fno-strict-aliasing
+
+if $clang_msvc
+  c.coptions += -Wno-deprecated-declarations
 
 # Disable warnings that pop up with -Wextra. Upstream doesn't seem to care
 # about these and it is not easy to disable specific warnings in a way that
