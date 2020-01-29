@@ -17,15 +17,14 @@ clang_msvc = ($c.id == 'clang' && $c.target.system == 'win32-msvc')
 # the official documentation.
 #
 # Note that we "prefix" them to what might have been specified by the user so
-# that it is possible to override the defaults by specifying them as =0 (it's
-# also the reason we use cc.* instead of c.*, the former comes first).
+# that it is possible to override the defaults by specifying them as =0.
 #
 # PREUPDATE_HOOK is required by SESSION
 #
 # Note that if disabling any previously-released features, then will need to
 # increment abi_major.
 #
-cc.poptions =+ \
+c.poptions =+ \
   -DSQLITE_ENABLE_COLUMN_METADATA=1 \
   -DSQLITE_ENABLE_DBPAGE_VTAB=1 \
   -DSQLITE_ENABLE_DBSTAT_VTAB=1 \
@@ -57,7 +56,7 @@ if! $windows
   # Note that the upstream package normally defines a number of other HAVE_*
   # macros, which we currently don't care about.
   #
-  cc.poptions =+ -DHAVE_USLEEP=1
+  c.poptions =+ -DHAVE_USLEEP=1
 
   # SQLITE_THREADSAFE requres -lpthread
   # SQLITE_ENABLE_LOAD_EXTENSION requires -ldl

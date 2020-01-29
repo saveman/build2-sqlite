@@ -1,0 +1,23 @@
+# file      : testscript
+# copyright : not copyrighted - public domain
+
+: basics
+:
+{
+  sql = 'CREATE TABLE test (id INTEGER PRIMARY KEY);
+INSERT INTO test VALUES(123);
+SELECT * FROM test;'
+
+  $* ':memory:' "$sql" >'123'
+}
+
+: archive
+:
+{
+  echo 'abc' >=f.txt;
+  $* f.sqlar -Ac f.txt &f.sqlar; # Creates archive adding a file.
+  $* f.sqlar -At >f.txt;         # Lists files in archive.
+  rm f.txt;
+  $* f.sqlar -Ax;                # Extracts files from archive.
+  cat f.txt >'abc'
+}

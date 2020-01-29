@@ -19,3 +19,7 @@
 *.pc
 
 sqlite3
+
+# Testscript output directory (can be symlink).
+#
+test-sqlite3

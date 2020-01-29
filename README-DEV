@@ -77,6 +77,10 @@ Fedora:
   --enable-threads-override-locks
   --enable-load-extension
 
+Note that if zlib.h is present in the system then upstream's configure script
+automatically enables functionality that uses zlib, which is the case for both
+distributions.
+
 Translating the configure script options into the macro definitions and adding
 the unconditionally defined macros (see upstream's Makefile.am for details) we
 end up with:

@@ -3,9 +3,10 @@
 
 ./: exe{sqlite3} doc{INSTALL README} man1{sqlite3} manifest
 
-import libs = libsqlite3%lib{sqlite3}
+import libs  = libsqlite3%lib{sqlite3}
+import libs += libz%lib{z}
 
-exe{sqlite3}: {h c}{*} $libs
+exe{sqlite3}: {h c}{*} $libs testscript
 
 gcc = ($c.class == 'gcc')
 
@@ -22,7 +23,8 @@ gcc = ($c.class == 'gcc')
 # This is the subset of features that we enable by default in libsqlite3 and
 # that affect the shell. They can be overridden in the same way.
 #
-cc.poptions =+ -DSQLITE_ENABLE_COLUMN_METADATA -DSQLITE_ENABLE_SESSION=1
+c.poptions =+ -DSQLITE_ENABLE_COLUMN_METADATA -DSQLITE_ENABLE_SESSION=1 \
+              -DSQLITE_HAVE_ZLIB
 
 # Both Debian and Fedora add this so gotta be important.
 #
@@ -38,14 +40,6 @@ if $gcc
 #
 if $gcc
   c.coptions += -Wno-extra -Wno-error
-
-# Smoke test.
-#
-exe{sqlite3}: file{test.out}: test.stdout = true
-exe{sqlite3}: test.arguments = ':memory:' \
-'CREATE TABLE test (id INTEGER PRIMARY KEY);
-INSERT INTO test VALUES(123);
-SELECT * FROM test;'
 
 # Don't install INSTALL file.
 #
