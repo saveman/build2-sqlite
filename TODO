@@ -1,0 +1,14 @@
+On the revision:
+
+- Canonicalize the license in the package manifests.
+
+- Normalize C comments in the tests source code replacing:
+
+  /*
+   * ...
+   */
+
+  with
+
+  /* ...
+   */
