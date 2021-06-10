@@ -51,6 +51,10 @@ c.poptions =+ \
   -DSQLITE_THREADSAFE=1 \
   -DSQLITE_USE_URI=1
 
+# Raise the maximum number of attached databases from 10 up to the limit.
+#
+c.poptions =+ -DSQLITE_MAX_ATTACHED=125
+
 if! $windows
 {
   # Note that the upstream package normally defines a number of other HAVE_*

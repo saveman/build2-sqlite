@@ -1,9 +1,9 @@
 : 1
 name: sqlite3
-version: 3.27.2+1
+version: 3.27.2+2
 project: sqlite
 summary: SQLite database engine shell program
-license: public domain
+license: blessing ; SQLite Blessing.
 topics: SQLite, SQL, relational database
 description-file: README
 url: https://sqlite.org/

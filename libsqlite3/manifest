@@ -1,9 +1,9 @@
 : 1
 name: libsqlite3
-version: 3.27.2+1
+version: 3.27.2+2
 project: sqlite
 summary: SQL database engine as an in-process C library
-license: public domain
+license: blessing ; SQLite Blessing.
 topics: C, SQLite, SQL, relational database
 description-file: README
 url: https://sqlite.org/

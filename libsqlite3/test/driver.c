@@ -2,8 +2,7 @@
  * copyright : not copyrighted - public domain
  */
 
-/*
- * Basic test to make sure the library is usable.
+/* Basic test to make sure the library is usable.
  */
 
 #ifdef NDEBUG
