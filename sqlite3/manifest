@@ -1,6 +1,6 @@
 : 1
 name: sqlite3
-version: 3.27.2+2
+version: 3.35.5-a.0.z
 project: sqlite
 summary: SQLite database engine shell program
 license: blessing ; SQLite Blessing.
@@ -14,7 +14,8 @@ email: sqlite-users@mailinglists.sqlite.org ; Mailing list.
 package-email: packaging@build2.org         ; Mailing list.
 build-error-email: builds@build2.org
 builds: all
+builds: -wasm
 depends: * build2 >= 0.11.0
 depends: * bpkg >= 0.11.0
 depends: libsqlite3 == $
-depends: libz >= 1.2.1100
+depends: libz ^1.2.1100

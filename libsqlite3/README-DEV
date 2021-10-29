@@ -4,7 +4,17 @@ version. See ../README-DEV for general notes on SQLite packaging.
 
 Symlink the required upstream files into libsqlite3/:
 
-$ ln -s ../../upstream/{sqlite3.c,sqlite3ext.h,sqlite3.h} libsqlite3
+$ mkdir libsqlite3
+$ pushd libsqlite3
+$ ln -s ../../upstream/{sqlite3.c,sqlite3ext.h,sqlite3.h} .
 
-Patch ../upstream/sqlite3.c to fix warnings that pop up with -Wall (see
-../upstream/sqlite3.c.patch for details).
+Also fix warnings that pop up with -Wall:
+
+$ mv sqlite3.c sqlite3.c.orig
+$ cp sqlite3.c.orig sqlite3.c
+$ git apply fix-warnings.patch
+$ popd
+
+Note that patches are produced by commands similar to the following:
+
+$ git diff >fix-warnings.patch

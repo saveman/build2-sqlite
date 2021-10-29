@@ -8,23 +8,24 @@ that we package separately (see the respective README-DEV files for details).
 We extract the upstream package from the archive and symlink the required files
 into the build2 package subdirectories.
 
-For 3.27.2 the archive URL is
-https://www.sqlite.org/2019/sqlite-autoconf-3270200.tar.gz. For the future
+For 3.35.5 the archive URL is
+https://www.sqlite.org/2021/sqlite-autoconf-3350500.tar.gz. For the future
 releases the URL can be deduced from the above.
 
 The upstream package can be configured to contain a specific feature set. We
 reproduce the union of features configured for the upstream source package in
 Debian and Fedora distributions. The configuration options defining these sets
 are specified in the Debian's rules and Fedora's RPM .spec files. Note,
-however, that at the time of this writing Fedora doesn't provide the 3.27.2
-package version, so we will use 3.29.0 instead. These files can be obtained as
-follows:
+however, that at the time of this writing Debian doesn't provide the 3.35.5
+package version, so we will use 3.36.0 instead. That's probably ok since
+3.36.0 doesn't introduce any new configuration options comparing to 3.35.5.
+These files can be obtained as follows:
 
-$ wget http://deb.debian.org/debian/pool/main/s/sqlite3/sqlite3_3.27.2-3.debian.tar.xz
-$ tar xf sqlite3_3.27.2-3.debian.tar.xz debian/rules
+$ wget http://deb.debian.org/debian/pool/main/s/sqlite3/sqlite3_3.36.0-2.debian.tar.xz
+$ tar xf sqlite3_3.36.0-2.debian.tar.xz debian/rules
 
-$ wget https://kojipkgs.fedoraproject.org//packages/sqlite/3.29.0/2.fc31/src/sqlite-3.29.0-2.fc31.src.rpm
-$ rpm2cpio sqlite-3.29.0-2.fc31.src.rpm | cpio -civ '*.spec'
+$ wget https://kojipkgs.fedoraproject.org/packages/sqlite/3.35.5/1.fc35/src/sqlite-3.35.5-1.fc35.src.rpm
+$ rpm2cpio sqlite-3.35.5-1.fc35.src.rpm | cpio -civ '*.spec'
 
 Some of the features are enabled via the preprocessor macro definitions and
 others via the configure script options. Here are the discovered configuration
@@ -71,7 +72,10 @@ Fedora:
   -DSQLITE_ENABLE_DBSTAT_VTAB=1
   -DSQLITE_ENABLE_FTS3_PARENTHESIS=1
   -DSQLITE_ENABLE_JSON1=1
+  -DSQLITE_ENABLE_FTS4=1
+  -DSQLITE_ENABLE_MATH_FUNCTIONS
 
+  --enable-fts4
   --enable-fts5
   --enable-threadsafe
   --enable-threads-override-locks
@@ -82,8 +86,8 @@ automatically enables functionality that uses zlib, which is the case for both
 distributions.
 
 Translating the configure script options into the macro definitions and adding
-the unconditionally defined macros (see upstream's Makefile.am for details) we
-end up with:
+the unconditionally defined macros (see upstream's Makefile.am and
+configure.ac for details) we end up with:
 
   -DSQLITE_ENABLE_COLUMN_METADATA=1
   -DSQLITE_ENABLE_DBPAGE_VTAB=1
@@ -96,8 +100,10 @@ end up with:
   -DSQLITE_ENABLE_FTS5=1
   -DSQLITE_ENABLE_JSON1=1
   -DSQLITE_ENABLE_LOAD_EXTENSION=1
+  -DSQLITE_ENABLE_MATH_FUNCTIONS=1
   -DSQLITE_ENABLE_PREUPDATE_HOOK=1
   -DSQLITE_ENABLE_RTREE=1
+  -DSQLITE_ENABLE_GEOPOLY=1
   -DSQLITE_ENABLE_SESSION=1
   -DSQLITE_ENABLE_STMTVTAB=1
   -DSQLITE_ENABLE_UNLOCK_NOTIFY=1
@@ -119,4 +125,4 @@ Debian/Ubuntu:  libsqlite3-0 libsqlite3-dev sqlite3
 Fedora/RHEL:    sqlite-libs  sqlite-devel   sqlite
 
 Search for the Debian and Fedora packages at https://packages.debian.org/search
-and https://apps.fedoraproject.org/packages/.
+and https://src.fedoraproject.org/.
