@@ -84,7 +84,9 @@ if! $windows
   # We also assume these are implementation dependencies (so there is no
   # c.export.libs listing them).
   #
-  c.libs += -lpthread -lm
+  # Note that we use -pthread instead of -lpthread for efficiency.
+  #
+  c.libs += -pthread -lm
 
   if! $bsd
     c.libs += -ldl
