@@ -8,6 +8,15 @@ import libs += libz%lib{z}
 
 exe{sqlite3}: {h c}{*} $libs testscript
 
+# @@ TMP Workaround unexpected build2 error:
+#
+#        shell.exe.o.i:165900:40: error: unterminated string literal
+#
+#        Note: on upgrade check if it is still required.
+#
+if ($c.target.class == 'windows' && $c.target.system == 'mingw32')
+  obj{shell}: cc.reprocess = true
+
 gcc = ($c.class == 'gcc')
 
 # Build options.
