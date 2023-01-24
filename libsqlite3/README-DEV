@@ -13,8 +13,14 @@ Also fix warnings that pop up with -Wall:
 $ mv sqlite3.c sqlite3.c.orig
 $ cp sqlite3.c.orig sqlite3.c
 $ git apply ../fix-warnings.patch
+$ git apply ../fix-writeMask-check.patch
 $ popd
 
-Note that patches are produced by commands similar to the following:
+Note that the fix-writeMask-check.patch patch is a backport of the
+c3f616597c40 commit (as appears in the https://github.com/sqlite/sqlite
+mirror). It shouldn't be required starting the release which will follow
+3.40.1.
+
+Also note that patches are produced by commands similar to the following:
 
 $ git diff >fix-warnings.patch
