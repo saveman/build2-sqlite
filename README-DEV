@@ -8,8 +8,8 @@ that we package separately (see the respective README-DEV files for details).
 We extract the upstream package from the archive and symlink the required files
 into the build2 package subdirectories.
 
-For 3.39.4 the archive URL is
-https://www.sqlite.org/2022/sqlite-autoconf-3390400.tar.gz. For the future
+For 3.45.3 the archive URL is
+https://www.sqlite.org/2024/sqlite-autoconf-3450300.tar.gz. For the future
 releases the URL can be deduced from the above.
 
 The upstream package can be configured to contain a specific feature set. We
@@ -18,11 +18,11 @@ Debian and Fedora distributions. The configuration options defining these sets
 are specified in the Debian's rules and Fedora's RPM .spec files. These files
 can be obtained as follows:
 
-$ wget wget https://deb.debian.org/debian/pool/main/s/sqlite3/sqlite3_3.39.4-1.debian.tar.xz
-$ tar xf sqlite3_3.39.4-1.debian.tar.xz debian/rules
+$ wget https://deb.debian.org/debian/pool/main/s/sqlite3/sqlite3_3.45.3-1.debian.tar.xz
+$ tar xf sqlite3_3.45.3-1.debian.tar.xz debian/rules
 
-$ wget https://kojipkgs.fedoraproject.org/packages/sqlite/3.39.4/1.fc38/src/sqlite-3.39.4-1.fc38.src.rpm
-$ rpm2cpio sqlite-3.39.4-1.fc38.src.rpm | cpio -civ '*.spec'
+$ wget https://kojipkgs.fedoraproject.org/packages/sqlite/3.45.3/1.fc41/src/sqlite-3.45.3-1.fc41.src.rpm
+$ rpm2cpio sqlite-3.45.3-1.fc41.src.rpm | cpio -civ '*.spec'
 
 Some of the features are enabled via the preprocessor macro definitions and
 others via the configure script options. Here are the discovered configuration
@@ -37,7 +37,6 @@ Debian:
   -DSQLITE_ENABLE_RTREE=1
   -DSQLITE_SOUNDEX=1
   -DSQLITE_ENABLE_UNLOCK_NOTIFY
-  -DSQLITE_OMIT_LOOKASIDE=1
   -DSQLITE_ENABLE_DBSTAT_VTAB
   -DSQLITE_ALLOW_ROWID_IN_VIEW
   -DSQLITE_ENABLE_UPDATE_DELETE_LIMIT=1
@@ -52,6 +51,7 @@ Debian:
   -DSQLITE_ENABLE_SESSION
   -DSQLITE_ENABLE_STMTVTAB
   -DSQLITE_MAX_VARIABLE_NUMBER=250000
+  -DSQLITE_STRICT_SUBTYPE=1
 
   --enable-threadsafe
   --enable-load-extension
@@ -83,8 +83,9 @@ automatically enables functionality that uses zlib, which is the case for both
 distributions.
 
 Translating the configure script options into the macro definitions and adding
-the unconditionally defined macros (see upstream's Makefile.am and
-configure.ac for details) we end up with:
+the recommended (harmless but potentially useful)
+SQLITE_ENABLE_EXPLAIN_COMMENTS macro definition (see upstream's Makefile.am
+and configure.ac for details) we end up with:
 
   -DSQLITE_ALLOW_ROWID_IN_VIEW=1
   -DSQLITE_ENABLE_COLUMN_METADATA=1
@@ -110,7 +111,7 @@ configure.ac for details) we end up with:
   -DSQLITE_LIKE_DOESNT_MATCH_BLOBS=1
   -DSQLITE_MAX_SCHEMA_RETRY=25
   -DSQLITE_MAX_VARIABLE_NUMBER=250000
-  -DSQLITE_OMIT_LOOKASIDE=1
+  -DSQLITE_STRICT_SUBTYPE=1
   -DSQLITE_SECURE_DELETE=1
   -DSQLITE_SOUNDEX=1
   -DSQLITE_THREADSAFE=1
