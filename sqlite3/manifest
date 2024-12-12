@@ -1,6 +1,6 @@
 : 1
 name: sqlite3
-version: 3.35.5
+version: 3.37.2
 project: sqlite
 summary: SQLite database engine shell program
 license: blessing ; SQLite Blessing.

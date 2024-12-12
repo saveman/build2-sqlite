@@ -24,10 +24,13 @@ clang_msvc = ($c.id == 'clang' && $c.target.system == 'win32-msvc')
 # GEOPOLY (alternative interface to the R-Tree extension) is always enabled by
 # upstream together with RTREE.
 #
+# ROWID_IN_VIEW restores some legacy behavior.
+#
 # Note that if disabling any previously-released features, then will need to
 # increment abi_major.
 #
 c.poptions =+ \
+  -DSQLITE_ALLOW_ROWID_IN_VIEW=1 \
   -DSQLITE_ENABLE_COLUMN_METADATA=1 \
   -DSQLITE_ENABLE_DBPAGE_VTAB=1 \
   -DSQLITE_ENABLE_DBSTAT_VTAB=1 \
@@ -37,11 +40,12 @@ c.poptions =+ \
   -DSQLITE_ENABLE_FTS3_TOKENIZER=1 \
   -DSQLITE_ENABLE_FTS4=1 \
   -DSQLITE_ENABLE_FTS5=1 \
+  -DSQLITE_ENABLE_GEOPOLY=1 \
   -DSQLITE_ENABLE_JSON1=1 \
   -DSQLITE_ENABLE_LOAD_EXTENSION=1 \
   -DSQLITE_ENABLE_MATH_FUNCTIONS=1 \
   -DSQLITE_ENABLE_PREUPDATE_HOOK=1 \
-  -DSQLITE_ENABLE_RTREE=1 -DSQLITE_ENABLE_GEOPOLY=1 \
+  -DSQLITE_ENABLE_RTREE=1 \
   -DSQLITE_ENABLE_SESSION=1 \
   -DSQLITE_ENABLE_STMTVTAB=1 \
   -DSQLITE_ENABLE_UNLOCK_NOTIFY=1 \
